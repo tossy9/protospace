@@ -1,4 +1,8 @@
+
 Structure of DataBase
+
+## ER図もどき
+![readme](readme.png)
 
 ## User
 ### association
