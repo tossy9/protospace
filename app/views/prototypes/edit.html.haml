@@ -3,15 +3,6 @@
     = form_tag('/prototypes/#{@prototype.id}', method: :patch) do
       %h3
         編集する
-.container.proto-new
-  = form_for @prototype do |f|
-    = f.hidden_field :user_id, value: current_user.id
-    .col-md-8.col-md-offset-2
-      %header.row.user-nav.row
-        .col-md-12
-          %h4 Title
-          .proto-new-title
-            = f.text_field :title, required: true, autofocus: true, placeholder: "Input Title"
       .row
         .col-md-12
           %h4 Main Thumbnail
@@ -38,4 +29,3 @@
           %h4 Concept
           = f.text_area :concept, require: true, placeholder: "Input Concept"
       .row.text-center.proto-btn
-        = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"
