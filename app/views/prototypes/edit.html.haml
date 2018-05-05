@@ -1,0 +1,8 @@
+.contents.row
+  .container
+    = form_tag('/prototype/#{@prototype.id}', method: :patch) do
+      %h3
+        編集する
+      %input{:autofocus => "true", :name => "image", :placeholder => "Image URL", :type => "text"}/
+      %textarea{:cols => "30", :name => "text", :placeholder => "text", :rows => "10"}
+      %input{:type => "submit", :value => "SENT"}/
