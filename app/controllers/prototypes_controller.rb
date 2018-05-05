@@ -26,6 +26,11 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.find(params[:id])
   end
 
+  def update
+    prototype = Prototype.find(params[:id])
+    prototypes.update(tweet_params)
+  end
+
   private
 
   def set_prototype

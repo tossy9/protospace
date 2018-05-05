@@ -1,8 +1,35 @@
 .contents.row
   .container
-    = form_tag('/prototype/#{@prototype.id}', method: :patch) do
+    = form_tag('/prototypes/#{@prototype.id}', method: :patch) do
       %h3
         編集する
-      %input{:autofocus => "true", :name => "image", :placeholder => "Image URL", :type => "text"}/
-      %textarea{:cols => "30", :name => "text", :placeholder => "text", :rows => "10"}
-      %input{:type => "submit", :value => "SENT"}/
+          %h4 Title
+          .proto-new-title
+            = f.text_field :title, required: true, autofocus: true, placeholder: "Input Title"
+      .row
+        .col-md-12
+          %h4 Main Thumbnail
+          .cover-image-upload#main_image_uploader
+            = f.fields_for :captured_images do |image|
+              %img
+              = image.file_field :content, required: true
+              = image.hidden_field :status, value: "main"
+        .col-md-12
+          %h4 Sub Thumbnails
+          %ul.proto-sub-list.list-group
+            - 3.times do |i|
+              %li.list-group-item.col-md-4
+                .image-upload
+                  = f.fields_for :captured_images do |image|
+                    %img
+                    = image.file_field :content
+                    = image.hidden_field :status, value: "sub"
+      .row.proto-description
+        .col-md-12
+          %h4 Catch Copy
+          = f.text_field :catch_copy, require: true, placeholder: "Input Catch Copy"
+        .col-md-12
+          %h4 Concept
+          = f.text_area :concept, require: true, placeholder: "Input Concept"
+      .row.text-center.proto-btn
+        = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"

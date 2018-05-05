@@ -12,7 +12,7 @@
             by
             = link_to "#{@prototype.user.name}", user_path(@prototype.user)
 
-            = link_to '編集' , "prototype/#{@prototype.id}/edit", method: :get
+            = link_to '編集' , "#{@prototype.id}/edit", method: :get
             .degree
               = @prototype.user.position
   .row
