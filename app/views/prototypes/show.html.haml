@@ -13,6 +13,8 @@
             = link_to "#{@prototype.user.name}", user_path(@prototype.user)
             .degree
               = @prototype.user.position
+              - if user_signed_in? && current_user.id == @prototype.user_id
+                = link_to '削除', prototype_path, method: :delete
   .row
     .col-md-9.image-box
       = image_tag(@prototype.set_main_thumbnail.large, class: 'img-responsive img-size-fix', style: "margin: 0 auto;")
