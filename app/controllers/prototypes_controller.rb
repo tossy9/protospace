@@ -28,6 +28,7 @@ class PrototypesController < ApplicationController
 
   def update
     prototype = Prototype.find(params[:id])
+    prototype.update(prototype_params)
   end
 
   private

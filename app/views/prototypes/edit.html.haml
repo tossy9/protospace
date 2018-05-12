@@ -1,7 +1,6 @@
 .contents.row
   .container
     = form_tag('/prototypes/#{@prototype.id}', method: :patch) do
-<<<<<<< HEAD
       %h3        編集する
 .container.proto-new
   = form_for @prototype do |f|
@@ -12,10 +11,6 @@
           %h4 Title
           .proto-new-title
             = f.text_field :title, required: true, autofocus: true, placeholder: "Input Title"
-=======
-      %h3
-        編集する
->>>>>>> parent of e2ebfe8... 更新
       .row
         .col-md-12
           %h4 Main Thumbnail
@@ -42,7 +37,4 @@
           %h4 Concept
           = f.text_area :concept, require: true, placeholder: "Input Concept"
       .row.text-center.proto-btn
-<<<<<<< HEAD
         = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"
-=======
->>>>>>> parent of e2ebfe8... 更新
