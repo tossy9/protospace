@@ -46,6 +46,7 @@ class PrototypesController < ApplicationController
   def update
     @prototype.update(prototype_params)
     redirect_to ({action: :show}), notice: "Prototype was successfully updated"
+  end
 
   def destroy
     @prototype.destroy if @prototype.user_id == current_user.id
