@@ -1,7 +1,7 @@
 .contents.row
   .container
     = form_tag('/prototypes/#{@prototype.id}', method: :patch) do
-      %h3        編集する
+      %h3        編集
 .container.proto-new
   = form_for @prototype do |f|
     = f.hidden_field :user_id, value: current_user.id
