@@ -1,5 +1,8 @@
+.contents.row
+  .container
+    %h3        編集
 .container.proto-new
-  = form_for @prototype do |f|
+  = form_for @prototype, url: {action: :update} do |f|
     = f.hidden_field :user_id, value: current_user.id
     .col-md-8.col-md-offset-2
       %header.row.user-nav.row
@@ -11,20 +14,26 @@
         .col-md-12
           %h4 Main Thumbnail
           .cover-image-upload#main_image_uploader
-            = f.fields_for :captured_images do |image|
+            = f.fields_for :captured_images, @prototype.captured_images[0] do |image|
               %img
-              = image.file_field :content, required: true
+              = image.file_field :content
               = image.hidden_field :status, value: "main"
         .col-md-12
           %h4 Sub Thumbnails
           %ul.proto-sub-list.list-group
-            - 3.times do |i|
+            - 1.upto(3) do |i|
               %li.list-group-item.col-md-4
                 .image-upload
-                  = f.fields_for :captured_images do |image|
-                    %img
-                    = image.file_field :content
-                    = image.hidden_field :status, value: "sub"
+                  - if @prototype.captured_images[i].nil?
+                    = f.fields_for :captured_images, @prototype.captured_images[i], include_id: false do |image|
+                      %img
+                      = image.file_field :content
+                      = image.hidden_field :status, value: "sub"
+                  - else
+                    = f.fields_for :captured_images, @prototype.captured_images[i] do |image|
+                      %img
+                      = image.file_field :content
+                      = image.hidden_field :status, value: "sub"
       .row.proto-description
         .col-md-12
           %h4 Catch Copy
@@ -33,4 +42,4 @@
           %h4 Concept
           = f.text_area :concept, require: true, placeholder: "Input Concept"
       .row.text-center.proto-btn
-        = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"
+        = f.submit "EDIT", id: "button", class: "btn btn-lg btn-primary btn-block"

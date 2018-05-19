@@ -14,6 +14,7 @@
             .degree
               = @prototype.user.position
               - if user_signed_in? && current_user.id == @prototype.user_id
+                = link_to '編集', edit_prototype_path
                 = link_to '削除', prototype_path, method: :delete
   .row
     .col-md-9.image-box
