@@ -2,7 +2,7 @@ class Prototype < ActiveRecord::Base
   belongs_to :user
   has_many :captured_images, dependent: :destroy
 
-  accepts_nested_attributes_for :captured_images, reject_if: :reject_sub_images
+  accepts_nested_attributes_for :captured_images, allow_destroy: true, reject_if: :reject_sub_images
 
   validates :title,
             :catch_copy,

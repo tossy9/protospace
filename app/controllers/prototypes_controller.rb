@@ -28,7 +28,7 @@ class PrototypesController < ApplicationController
 
   def update
     prototype = Prototype.find(params[:id])
-    prototype.update(prototype_params)
+    prototype.update(update_prototype_params)
   end
 
   private
@@ -46,4 +46,15 @@ class PrototypesController < ApplicationController
       captured_images_attributes: [:content, :status]
     )
   end
+
+  def update_prototype_params
+    params.require(:prototype).permit(
+      :title,
+      :catch_copy,
+      :concept,
+      :user_id,
+      captured_images_attributes: [:id, :content, :status, :prototype_id, :_destory]
+    )
+  end
+
 end
