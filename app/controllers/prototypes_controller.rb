@@ -2,7 +2,7 @@ class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :update, :edit, :destroy]
 
   def index
-    @prototypes = Prototype.all
+    @prototypes = Prototype.page(params[:page]).per(4).order("created_at DESC")
   end
 
   def new
@@ -46,6 +46,9 @@ class PrototypesController < ApplicationController
   def update
     @prototype.update(prototype_params)
     redirect_to ({action: :show}), notice: "Prototype was successfully updated"
+
+  def destroy
+    @prototype.destroy if @prototype.user_id == current_user.id
   end
 
   private
