@@ -9,7 +9,7 @@
       %header.row.user-nav.row
         .col-md-12
           %h4 Title
-          .proto-edit-title
+          .proto-new-title
             = f.text_field :title, required: true, autofocus: true, placeholder: "Input Title"
       .row
         .col-md-12
@@ -37,17 +37,4 @@
           %h4 Concept
           / = f.text_area :concept, require: true, placeholder: "Input Concept"
       .row.text-center.proto-btn
-        = f.submit "EDIT", id: "button", class: "btn btn-lg btn-primary btn-block"
-
-
-
-
-
-
-
-
-
-
-    %textarea{:cols => "30", :name => "text", :placeholder => "text", :rows => "10"}= @prototype.id
-    %br/
-    %input{:type => "submit", :value => "変更する"}/
+        = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"
