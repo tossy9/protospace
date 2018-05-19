@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: :show
+  before_action :set_prototype, only: [:show, :update, :edit, :destroy]
 
   def index
     @prototypes = Prototype.all
@@ -15,7 +15,7 @@ class PrototypesController < ApplicationController
     if @prototype.save
       redirect_to :root, notice: 'New prototype was successfully created'
     else
-      redirect_to ({ action: :new }), alert: 'YNew prototype was unsuccessfully created'
+      redirect_to ({ action: :new }), alert: 'New prototype was unsuccessfully created'
     end
   end
 
@@ -23,12 +23,29 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    @prototype = Prototype.find(params[:id])
+    unless @prototype.user_id == current_user.id
+      redirect_to ({action: :show}), alert: "Your account can not edit"
+    end
+
+    num = 0
+    if @prototype.captured_images[1].nil?
+      num = 3
+    elsif @prototype.captured_images[2].nil?
+      num = 2
+    elsif @prototype.captured_images[3].nil?
+      num = 1
+    end
+
+    unless num == 0 then
+      1.upto(num) do |i|
+        @prototype.captured_images.build
+      end
+    end
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    prototype.update(update_prototype_params)
+    @prototype.update(prototype_params)
+    redirect_to ({action: :show}), notice: "Prototype was successfully updated"
   end
 
   private
@@ -43,17 +60,7 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :user_id,
-      captured_images_attributes: [:content, :status]
-    )
-  end
-
-  def update_prototype_params
-    params.require(:prototype).permit(
-      :title,
-      :catch_copy,
-      :concept,
-      :user_id,
-      captured_images_attributes: [:content, :status, :_destory, :id]
+      captured_images_attributes: [:id, :content, :status]
     )
   end
 end
