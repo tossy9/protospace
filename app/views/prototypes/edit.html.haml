@@ -2,7 +2,7 @@
   .container
     %h3        編集
 .container.proto-new
-  = form_for @prototype, url: {action: :update} do |f|
+  = form_for @prototype, url: {action: :update}, html: {class: 'image-preview'}do |f|
     = f.hidden_field :user_id, value: current_user.id
     .col-md-8.col-md-offset-2
       %header.row.user-nav.row

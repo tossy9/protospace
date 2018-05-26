@@ -34,6 +34,11 @@ class PrototypesController < ApplicationController
         @prototype.captured_images.build
       end
     end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @prototype}
+    end
   end
 
   def update
