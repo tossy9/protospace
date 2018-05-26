@@ -24,6 +24,7 @@
         - @prototype.captured_images.sub.each do |image|
           %li.list-group-item
             = image_tag(image.content, class: 'img-responsive')
+
   .row.proto-description
     .col-md-3
       %h4 Catch Copy
@@ -40,3 +41,7 @@
           %a{href: "#", class: "btn btn-default"} iPad
         %li
           %a{href: "#", class: "btn btn-default"} wireframe
+    .comment
+      %p write a comment
+      %textarea{:type => "text",:rows => "5", :col => "40", :placeholder => "sign to put your comment"}
+      %input{:type => "submit", :name => "btn", :value => "COMMENT"}
