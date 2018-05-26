@@ -24,16 +24,17 @@
             - 1.upto(3) do |i|
               %li.list-group-item.col-md-4
                 .image-upload
-                  - if @prototype.captured_images[i].nil?
-                    = f.fields_for :captured_images, @prototype.captured_images[i], include_id: false do |image|
-                      %img
-                      = image.file_field :content
-                      = image.hidden_field :status, value: "sub"
-                  - else
-                    = f.fields_for :captured_images, @prototype.captured_images[i] do |image|
-                      %img
-                      = image.file_field :content
-                      = image.hidden_field :status, value: "sub"
+                  %div{class: i}
+                    - if @prototype.captured_images[i].nil?
+                      = f.fields_for :captured_images, @prototype.captured_images[i], include_id: false do |image|
+                        %img
+                        = image.file_field :content
+                        = image.hidden_field :status, value: "sub"
+                    - else
+                      = f.fields_for :captured_images, @prototype.captured_images[i] do |image|
+                        %img
+                        = image.file_field :content
+                        = image.hidden_field :status, value: "sub"
       .row.proto-description
         .col-md-12
           %h4 Catch Copy
