@@ -14,7 +14,11 @@ $(function(){
         //既存のプレビューを削除
         $(".cover-image-upload img").empty();
         // .prevewの領域の中にロードした画像を表示するimageタグを追加
-        $(".cover-image-upload img").attr("src", e.target.result);
+        $(".cover-image-upload img").attr({
+          src: e.target.result,
+          width: "100%",
+          height: "100%"
+      });
       };
     })(file);
     reader.readAsDataURL(file);
