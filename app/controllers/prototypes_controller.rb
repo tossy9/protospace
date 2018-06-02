@@ -8,6 +8,10 @@ class PrototypesController < ApplicationController
   def new
     @prototype = Prototype.new
     @prototype.captured_images.build
+    respond_to do |format|
+      format.html
+      format.json { render json: @prototype}
+    end
   end
 
   def create
@@ -26,20 +30,18 @@ class PrototypesController < ApplicationController
     unless @prototype.user_id == current_user.id
       redirect_to ({action: :show}), alert: "Your account can not edit"
     end
-
-    num = 0
-    if @prototype.captured_images[1].nil?
-      num = 3
-    elsif @prototype.captured_images[2].nil?
-      num = 2
-    elsif @prototype.captured_images[3].nil?
-      num = 1
-    end
-
-    unless num == 0 then
-      1.upto(num) do |i|
+    
+    sub_total = 3
+    
+    1.upto(sub_total) do |i|
+      if @prototype.captured_images[i].nil?
         @prototype.captured_images.build
       end
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @prototype}
     end
   end
 
