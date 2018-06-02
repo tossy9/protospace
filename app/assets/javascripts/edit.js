@@ -1,8 +1,8 @@
-$(function(){
-  $('.cover-image-upload').on('change', 'input[type="file"]', function(e) {
+$(document).on('turbolinks:load',
+function(){
+  $('.cover-image-upload').on ('change', 'input[type="file"]', function(e) {
     var file = e.target.files[0];
     var reader = new FileReader();
-    
     // 画像ファイル以外の場合は何もしない
     if(file.type.indexOf("image") < 0){
       alert("画像ファイルを指定してください");
