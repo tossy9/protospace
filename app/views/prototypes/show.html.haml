@@ -41,7 +41,32 @@
           %a{href: "#", class: "btn btn-default"} iPad
         %li
           %a{href: "#", class: "btn btn-default"} wireframe
-    .comment
-      %p write a comment
-      %textarea{:type => "text",:rows => "5", :col => "40", :placeholder => "sign to put your comment"}
-      %input{:type => "submit", :name => "btn", :value => "COMMENT"}
+  .row.proto-comments
+    .col-md-12
+      %h4<>
+        Comments
+        %span#comments_count.num<>
+        (コメント数:xxx)
+
+    .col-md-8
+      #comments
+        - if @comments
+          - @comments.each do |comment|
+            .media
+              .media-left
+              .media-body
+                %h4.media-heading#top-aligned-media
+                  = comment.user.name
+                %p
+                  = comment.content
+      - if user_signed_in?
+        .form-inlign
+        = form_for ([@prototype, @comment]) do |f|
+          %h4 write a comment
+          .row
+            .form-group.col-md-10
+            = f.text_area :content, require: true, placeholder: "Input Comment"
+            = f.hidden_field :prototype_id, value: @prototype.id
+            = f.hidden_field :user_id, value: current_user.id
+          .form-group.col-md-2
+            = f.submit "COMMENT", id: "button", class: "btn btn-primary"

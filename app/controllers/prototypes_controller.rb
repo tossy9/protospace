@@ -20,6 +20,8 @@ class PrototypesController < ApplicationController
   end
 
   def show
+    @comments = @prototype.comments.includes(:user)
+    @comment  = @prototype.comments.build(user_id: current_user.id) if current_user
   end
 
   def edit
