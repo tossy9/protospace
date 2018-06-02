@@ -8,6 +8,10 @@ class PrototypesController < ApplicationController
   def new
     @prototype = Prototype.new
     @prototype.captured_images.build
+    respond_to do |format|
+      format.html
+      format.json { render json: @prototype}
+    end
   end
 
   def create
